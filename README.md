@@ -1,4 +1,4 @@
-# Alchemical protein-ligand free energy benchmark study using Perses with `espaloma-0.3.0` force field
+# Alchemical protein-ligand free energy benchmark study using Perses and espaloma-0.3.0
 This repository includes scripts to validate `espaloma-0.3.0` force field with relative alchemical binding free energy infrastrcuture, [Perses](https://github.com/choderalab/perses). This repository is part of [espaloma-0.3.0-manuscript](https://github.com/choderalab/espaloma-0.3.0-manuscript).
 
 ## Description

@@ -83,7 +83,7 @@ def load_csv(input_prefix, targets, forcefield):
     return csv_path
 
 
-def _plot_absolute_custom(input_prefix, targets, forcefield):
+def _plot_absolute_custom(input_prefix, targets, forcefield, figure_extension):
     """ Plot absolute binding free energy calculation for multiple targets.
     """
     # https://github.com/OpenFreeEnergy/cinnabar/blob/0.3.0/cinnabar/plotting.py#L414
@@ -116,6 +116,11 @@ def _plot_absolute_custom(input_prefix, targets, forcefield):
             colors += [list(mycolor_dict.values())[i] for _ in range(len(_x_data))]
             labels += target
 
+    if figure_extension == "png":
+        dpi=600
+    else:
+        dpi=2400
+
     from cinnabar.plotting import _master_plot
     _master_plot(
         x_data,
@@ -128,15 +133,15 @@ def _plot_absolute_custom(input_prefix, targets, forcefield):
         target_name=f'No. of ligands',
         title=f'Absolute binding energies - All',
         figsize=5,
-        dpi=2400,
+        dpi=dpi,
         color=colors,
-        filename=f'./plot_absolute_{forcefield}_custom.png',
+        filename=f'./plot_absolute_{forcefield}_custom.{figure_extension}',
         xy_lim=[-14.8, -0.8],
         xy_tick_frequency = 2
     )
 
 
-def _plot_relative_custom(input_prefix, targets, forcefield):
+def _plot_relative_custom(input_prefix, targets, forcefield, figure_extension):
     """ Plot relative binding free energy calculation for multiple targets.
     """
     # https://github.com/OpenFreeEnergy/cinnabar/blob/0.3.0/cinnabar/plotting.py#L282
@@ -162,24 +167,30 @@ def _plot_relative_custom(input_prefix, targets, forcefield):
             yerr = np.concatenate((yerr, _yerr), axis=-1)
             colors += [list(mycolor_dict.values())[i] for _ in range(len(_x_data))]
 
+    if figure_extension == "png":
+        dpi=600
+    else:
+        dpi=2400
+
     from cinnabar.plotting import _master_plot
     _master_plot(
         x_data,
         y_data,
         xerr=xerr,
         yerr=yerr,
+        statistics=["RMSE", "MUE", "R2", "rho"],
         target_name=f'No. of ligands',
         title=f'Relative binding energies - All',
         figsize=5,
-        dpi=2400,
+        dpi=dpi,
         color=colors,
-        filename=f'./plot_relative_{forcefield}_custom.png',
+        filename=f'./plot_relative_{forcefield}_custom.{figure_extension}',
         xy_lim=[-4.8, 4.8],
         xy_tick_frequency=1
     )
 
 
-def _plot_dummy_legend(targets):
+def _plot_dummy_legend(targets, figure_extension):
     """ Create dummy legend figure.
     """
     import matplotlib.pyplot as plt
@@ -188,8 +199,11 @@ def _plot_dummy_legend(targets):
         ax.scatter(x=[], y =[], s=100, label=target, c=list(mycolor_dict.values())[i])
     ax.legend(loc="upper right", fontsize=20)
     plt.tight_layout()
-    plt.savefig("legend.png", dpi=2400)
-    plt.savefig("legend.svg", format='svg', dpi=600)
+    if figure_extension == "png":
+        dpi=300
+    else:
+        dpi=2400
+    plt.savefig(f"legend.{figure_extension}", dpi=dpi)
 
 
 def run(kwargs):
@@ -201,26 +215,15 @@ def run(kwargs):
     targets = [ str(_) for _ in targets.split() ]
     
     # Calculate abosolute and relative results for individual target sytem and merge them together 
-    _plot_absolute_custom(input_prefix, targets, forcefield)
-    _plot_relative_custom(input_prefix, targets, forcefield)
-    _plot_dummy_legend(targets)
+    figure_extension = "png"
+    _plot_absolute_custom(input_prefix, targets, forcefield, figure_extension)
+    _plot_relative_custom(input_prefix, targets, forcefield, figure_extension)
+    _plot_dummy_legend(targets, figure_extension)
 
-
-    # TODO: DO WE NEED THIS?
-    # Merge all cinnabar results into a single csv file
-    #csv_path = load_csv(input_prefix, targets, forcefield)
-    # Relative plot using cinnabar plotting function
-    #fe = wrangle.FEMap(csv_path)
-    #plotting.plot_DDGs(fe.graph,
-    #                target_name=f'No. of ligands',
-    #                title=f'Relative binding energies - All',
-    #                figsize=5,
-    #                #dpi=600,
-    #                filename=f'./plot_relative_{forcefield}.png',
-    #                xy_lim=[-8.9, 6.9],
-    #                xy_tick_frequency=2
-    #                )
-
+    figure_extension = "svg"
+    _plot_absolute_custom(input_prefix, targets, forcefield, figure_extension)
+    _plot_relative_custom(input_prefix, targets, forcefield, figure_extension)
+    _plot_dummy_legend(targets, figure_extension)
 
 
 @click.command()

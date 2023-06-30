@@ -24,7 +24,7 @@ mycolor_dict = mcolors.TABLEAU_COLORS
 #  'tab:cyan': '#17becf'}
 
 
-def _plot_absolute_custom(input_prefix, targets, forcefield):
+def _plot_absolute_custom(input_prefix, targets, forcefield, figure_extension):
     """ Plot predicted binding absolute free energy difference among two different trials.
     """
     # https://github.com/OpenFreeEnergy/cinnabar/blob/0.3.0/cinnabar/plotting.py#L414
@@ -65,6 +65,11 @@ def _plot_absolute_custom(input_prefix, targets, forcefield):
             yerr = np.concatenate((yerr, _yerr), axis=-1)
             colors += [list(mycolor_dict.values())[i] for _ in range(len(_x_data))]
             labels += target
+    
+    if figure_extension == "png":
+        dpi=600
+    else:
+        dpi=2400
 
     from cinnabar.plotting import _master_plot
     _master_plot(
@@ -80,15 +85,15 @@ def _plot_absolute_custom(input_prefix, targets, forcefield):
         target_name=f'No. of ligands',
         title=f'Absolute binding energies - All',
         figsize=5,
-        dpi=600,
+        dpi=dpi,
         color=colors,
-        filename=f'./plot_absolute_{forcefield}_custom.png',
-        #xy_lim=[-16.4, -0.1],
+        filename=f'./plot_absolute_{forcefield}_custom.{figure_extension}',
+        xy_lim=[-13.9, -0.5],
         xy_tick_frequency=2,
     )
 
 
-def _plot_relative_custom(input_prefix, targets, forcefield):
+def _plot_relative_custom(input_prefix, targets, forcefield, figure_extension):
     """ Plot predicted relative binding free energy difference among two different trials.
     """
     # https://github.com/OpenFreeEnergy/cinnabar/blob/0.3.0/cinnabar/plotting.py#L282
@@ -122,6 +127,11 @@ def _plot_relative_custom(input_prefix, targets, forcefield):
             yerr = np.concatenate((yerr, _yerr), axis=-1)
             colors += [list(mycolor_dict.values())[i] for _ in range(len(_x_data))]
 
+    if figure_extension == "png":
+        dpi=600
+    else:
+        dpi=2400
+
     from cinnabar.plotting import _master_plot
     _master_plot(
         x_data,
@@ -130,27 +140,32 @@ def _plot_relative_custom(input_prefix, targets, forcefield):
         yerr=yerr,
         xlabel='Calculated(1)',
         ylabel='Calculated(2)',
+        statistics=["RMSE", "MUE", "R2", "rho"],
         target_name=f'No. of ligands',
         title=f'Relative binding energies - All',
         figsize=5,
-        dpi=600,
+        dpi=dpi,
         color=colors,
-        filename=f'./plot_relative_{forcefield}_custom.png',
-        #xy_lim=[-8.9, 6.9],
-        xy_tick_frequency=2
+        filename=f'./plot_relative_{forcefield}_custom.{figure_extension}',
+        xy_lim=[-5.1, 5.1],
+        xy_tick_frequency=1
     )
 
 
-def _plot_dummy_legend(targets):
+def _plot_dummy_legend(targets, figure_extension):
     """ Create dummy legend figure.
     """
     import matplotlib.pyplot as plt
+    fig, ax = plt.subplots()
     for i, target in enumerate(targets):
-        fig, ax = plt.subplots(dpi=600)
         ax.scatter(x=[], y =[], s=100, label=target, c=list(mycolor_dict.values())[i])
     ax.legend(loc="upper right", fontsize=20)
     plt.tight_layout()
-    plt.savefig(f"legend.png")
+    if figure_extension == "png":
+        dpi=300
+    else:
+        dpi=2400
+    plt.savefig(f"legend.{figure_extension}", dpi=dpi)
 
 
 def run(kwargs):
@@ -162,9 +177,15 @@ def run(kwargs):
     targets = [ str(_) for _ in targets.split() ]
 
     # Calculate abosolute values for individual target sytem and merge them together 
-    _plot_absolute_custom(input_prefix, targets, forcefield)
-    _plot_relative_custom(input_prefix, targets, forcefield)
-    _plot_dummy_legend(targets)
+    figure_extension = "png"
+    _plot_absolute_custom(input_prefix, targets, forcefield, figure_extension)
+    _plot_relative_custom(input_prefix, targets, forcefield, figure_extension)
+    _plot_dummy_legend(targets, figure_extension)
+
+    figure_extension = "svg"
+    _plot_absolute_custom(input_prefix, targets, forcefield, figure_extension)
+    _plot_relative_custom(input_prefix, targets, forcefield, figure_extension)
+    _plot_dummy_legend(targets, figure_extension)
 
 
 
