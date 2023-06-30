@@ -1,0 +1,12 @@
+# obsolete directories
+_obsolete/
+
+# directories, intermediate files
+experiment/**
+figures/**
+
+# png, csv, log
+**.png
+**.svg
+**.csv
+**.log
