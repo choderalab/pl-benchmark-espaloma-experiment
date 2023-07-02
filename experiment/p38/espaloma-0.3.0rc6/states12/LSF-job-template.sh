@@ -7,7 +7,7 @@
 #BSUB -q gpuqueue
 #BSUB -sp 1 # low priority. default is 12, max is 25
 #BSUB -gpu num=1:j_exclusive=yes:mode=shared
-#BSUB -W  24:00
+#BSUB -W  28:00
 #BSUB -o stdout/out_%J_%I.stdout
 #BSUB -eo stderr/out_%J_%I.stderr
 #BSUB -L /bin/bash

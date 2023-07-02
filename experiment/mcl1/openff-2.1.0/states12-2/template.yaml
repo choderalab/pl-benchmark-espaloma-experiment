@@ -55,7 +55,8 @@ n_equilibration_iterations: 0
 
 # Number of iterations to run
 #n_cycles: 5000
-n_cycles: 10000
+#n_cycles: 10000
+n_cycles: 15000
 
 # Number of alchemical intermediate states to use
 n_states: 12

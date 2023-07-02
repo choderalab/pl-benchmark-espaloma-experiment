@@ -1,5 +1,5 @@
 ## Description
-Following directories include LSF scripts run `Perses` for each target system with different force fields.
+Following directories include LSF scripts to run `Perses` for each target system with different force fields.
 
 ## Manifest
 - `cdk2/`: Cyclin dependent kinase 2
@@ -30,5 +30,5 @@ Following directories include LSF scripts run `Perses` for each target system wi
     >bsub < LSF-job-template.sh
 
     - This will run the benchmark python script `run_benchmark.py` found [here](https://github.com/kntkb/protein-ligand-benchmark-custom/tree/main/script), but the same python script used to run the benchmark is also store locally (`script/run_benchmark.py`).
-- Analyze and plot relative and absolute free energy correlations with experimental values
+- Analyze and plot relative and absolute free energy correlations respect to experimental values
     >python ../../../script/benchmark_analysis.py --target tyk2

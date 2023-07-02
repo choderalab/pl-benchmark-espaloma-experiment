@@ -1,5 +1,5 @@
 # Alchemical protein-ligand free energy benchmark study using Perses and espaloma-0.3.0
-This repository includes scripts to validate `espaloma-0.3.0` force field with relative alchemical binding free energy infrastrcuture, [Perses](https://github.com/choderalab/perses). This repository is part of [espaloma-0.3.0-manuscript](https://github.com/choderalab/espaloma-0.3.0-manuscript).
+This repository includes scripts to validate `espaloma-0.3.0` force field with relative alchemical protein-ligand binding free energy infrastrcuture, [Perses](https://github.com/choderalab/perses). This repository is part of [espaloma-0.3.0-manuscript](https://github.com/choderalab/espaloma-0.3.0-manuscript).
 
 ## Description
 Here, we compare the relative alchemical protein-ligand binding free energy calculation accuracy using `espaloma-0.3.0`, `espaloma-0.2.2`, and `openff-2.1.0` force fields against a custom [protein-ligand benchmark dataset](https://github.com/kntkb/protein-ligand-benchmark-custom) which was original taken from the [OpenFF protein-ligand-benchmark](https://github.com/openforcefield/protein-ligand-benchmark). 
