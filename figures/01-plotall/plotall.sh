@@ -12,3 +12,8 @@ python plotall.py --input_prefix "../../experiment" --targets "${targets}" --for
 targets="tyk2 cdk2 mcl1 p38"
 forcefield="espaloma-0.3.0rc6"
 python plotall.py --input_prefix "../../experiment" --targets "${targets}" --forcefield ${forcefield}
+
+# espaloma-0.3.0 complex
+targets="tyk2 cdk2 mcl1 p38"
+forcefield="espaloma-0.3.0rc6-complex"
+python plotall.py --input_prefix "../../experiment" --targets "${targets}" --forcefield ${forcefield}

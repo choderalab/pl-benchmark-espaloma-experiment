@@ -185,7 +185,7 @@ def _plot_relative_custom(input_prefix, targets, forcefield, figure_extension):
         dpi=dpi,
         color=colors,
         filename=f'./plot_relative_{forcefield}_custom.{figure_extension}',
-        xy_lim=[-4.8, 4.8],
+        xy_lim=[-4.9, 4.9],
         xy_tick_frequency=1
     )
 
