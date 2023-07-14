@@ -29,6 +29,6 @@ Following directories include LSF scripts to run `Perses` for each target system
 - Run LSF job to run Perses benchmark
     >bsub < LSF-job-template.sh
 
-    - This will run the benchmark python script `run_benchmark.py` found [here](https://github.com/kntkb/protein-ligand-benchmark-custom/tree/main/script), but the same python script used to run the benchmark is also store locally (`script/run_benchmark.py`).
+    - This will run the benchmark python script `run_benchmark.py` found [here](https://github.com/kntkb/protein-ligand-benchmark-custom/tree/main/script), but the same python script used to run the benchmark is also stored locally (`script/run_benchmark.py`).
 - Analyze and plot relative and absolute free energy correlations respect to experimental values
     >python ../../../script/benchmark_analysis.py --target tyk2
