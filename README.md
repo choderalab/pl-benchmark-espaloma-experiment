@@ -50,9 +50,9 @@ All figures are plotted using a modified version of `cinnabar 0.3.0` (commit has
 If you find this helpful please cite the following:
 
 ```
-@misc{takaba2023espaloma030,
-      title={Espaloma-0.3.0: Machine-learned molecular mechanics force field for the simulation of protein-ligand systems and beyond}, 
-      author={Kenichiro Takaba and Iván Pulido and Mike Henry and Hugo MacDermott-Opeskin and John D. Chodera and Yuanqing Wang},
+@misc{takaba2023machinelearned,
+      title={Machine-learned molecular mechanics force field for the simulation of protein-ligand systems and beyond}, 
+      author={Kenichiro Takaba and Iván Pulido and Pavan Kumar Behara and Mike Henry and Hugo MacDermott-Opeskin and John D. Chodera and Yuanqing Wang},
       year={2023},
       eprint={2307.07085},
       archivePrefix={arXiv},
