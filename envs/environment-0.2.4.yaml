@@ -439,11 +439,13 @@ dependencies:
   - pip:
     - amberlite==22.0
     - amberutils==21.0
-    - espaloma==0.2.4
+    #- espaloma==0.2.4
+    # work around for git-lsf
+    - https://github.com/choderalab/espaloma/archive/refs/tags/0.2.4.tar.gz
     - mmpbsa-py==16.0
-    - openmmforcefields==0.11.0+77.g6d2c3dc
+    #- openmmforcefields==0.11.0+77.g6d2c3dc
+    - git+https://github.com/kntkb/openmmforcefields.git@6d2c3dcd33d9800a32032d28b6b2dca92f348a43
     - packmol-memgen==1.2.3rc0
     - pdb4amber==22.0
     - pytraj==2.0.6
     - sander==22.0
-prefix: /lila/home/takabak/mambaforge/envs/perses-espaloma-0.2.4
